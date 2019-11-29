@@ -1,0 +1,2207 @@
+@prefix : <http://www.semanticweb.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix Place: <http://kndonto.org/Place#> .
+@prefix Company: <http://kndonto.org/Company#> .
+@prefix Domitory: <http://kndonto.org/Domitory#> .
+@prefix Industry: <http://kndonto.org/Industry#> .
+@prefix StudentInfo: <http://kndonto.org/Student/StudentInfo#> .
+@prefix Organization: <http://kndonto.org/Organization#> .
+@base <http://kndonto.org/Student/ontology> .
+
+<http://kndonto.org/Student/ontology> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://kndonto.org/Company#CompanyName
+Company:CompanyName rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Company#attribute
+Company:attribute rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Company#avg_monthly_salary
+Company:avg_monthly_salary rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Company#domain
+Company:domain rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Domitory#Add_Equipment
+Domitory:Add_Equipment rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Domitory#Floor
+Domitory:Floor rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Domitory#RoomNo
+Domitory:RoomNo rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Domitory#fee
+Domitory:fee rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Domitory#size
+Domitory:size rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Industry#industry
+Industry:industry rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Place#capital
+Place:capital rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Place#gdp
+Place:gdp rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Place#house_pricing
+Place:house_pricing rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Place#latitude
+Place:latitude rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Place#longitude
+Place:longitude rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Place#placeName
+Place:placeName rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Student/StudentInfo#phone_number
+StudentInfo:phone_number rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Student/StudentInfo#situation
+StudentInfo:situation rdf:type owl:AnnotationProperty .
+
+
+###  http://kndonto.org/Student/StudentInfo#student_id
+StudentInfo:student_id rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/firstName
+foaf:firstName rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/lastName
+foaf:lastName rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/name
+foaf:name rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://kndonto.org/Domitory#HasRoom
+Domitory:HasRoom rdf:type owl:ObjectProperty ;
+                 rdfs:domain Domitory:RoomCapacity ;
+                 rdfs:range Domitory:Domitory .
+
+
+###  http://kndonto.org/Domitory#HasStudent
+Domitory:HasStudent rdf:type owl:ObjectProperty ;
+                    owl:inverseOf StudentInfo:LiveINRoom ;
+                    rdfs:domain Domitory:Domitory ;
+                    rdfs:range StudentInfo:Student .
+
+
+###  http://kndonto.org/Industry#Pillar_for
+Industry:Pillar_for rdf:type owl:ObjectProperty ;
+                    owl:inverseOf Place:has_pillar_industry ;
+                    rdfs:domain Industry:Industry ;
+                    rdfs:range <http://dbpedia.org/ontology/Place> .
+
+
+###  http://kndonto.org/Organization#hasStudent
+Organization:hasStudent rdf:type owl:ObjectProperty ;
+                        owl:inverseOf StudentInfo:StudyIn ;
+                        rdfs:domain Organization:College ;
+                        rdfs:range StudentInfo:Student .
+
+
+###  http://kndonto.org/Place#Location
+Place:Location rdf:type owl:ObjectProperty ;
+               rdfs:domain Organization:Organization ;
+               rdfs:range <http://dbpedia.org/ontology/Place> .
+
+
+###  http://kndonto.org/Place#hasResidents
+Place:hasResidents rdf:type owl:ObjectProperty ;
+                   owl:inverseOf StudentInfo:LiveIn ;
+                   rdfs:domain <http://dbpedia.org/ontology/Place> ;
+                   rdfs:range foaf:Person .
+
+
+###  http://kndonto.org/Place#has_pillar_industry
+Place:has_pillar_industry rdf:type owl:ObjectProperty ;
+                          rdfs:domain <http://dbpedia.org/ontology/Place> ;
+                          rdfs:range Industry:Industry .
+
+
+###  http://kndonto.org/Student/StudentInfo#Current_Situation
+StudentInfo:Current_Situation rdf:type owl:ObjectProperty ;
+                              rdfs:domain foaf:Person ;
+                              rdfs:range StudentInfo:Situation .
+
+
+###  http://kndonto.org/Student/StudentInfo#Employ
+StudentInfo:Employ rdf:type owl:ObjectProperty ;
+                   owl:inverseOf StudentInfo:EmployedBy ;
+                   rdfs:domain <http://dbpedia.org/ontology/Company> ;
+                   rdfs:range StudentInfo:Student .
+
+
+###  http://kndonto.org/Student/StudentInfo#EmployedBy
+StudentInfo:EmployedBy rdf:type owl:ObjectProperty ;
+                       rdfs:domain StudentInfo:Student ;
+                       rdfs:range <http://dbpedia.org/ontology/Company> .
+
+
+###  http://kndonto.org/Student/StudentInfo#HasRoomLeader
+StudentInfo:HasRoomLeader rdf:type owl:ObjectProperty ;
+                          rdfs:domain StudentInfo:Student ;
+                          rdfs:range StudentInfo:Student .
+
+
+###  http://kndonto.org/Student/StudentInfo#HasRoomMate
+StudentInfo:HasRoomMate rdf:type owl:ObjectProperty ,
+                                 owl:SymmetricProperty ,
+                                 owl:TransitiveProperty ;
+                        rdfs:domain StudentInfo:Student ;
+                        rdfs:range StudentInfo:Student .
+
+
+###  http://kndonto.org/Student/StudentInfo#LiveINRoom
+StudentInfo:LiveINRoom rdf:type owl:ObjectProperty ;
+                       rdfs:domain StudentInfo:Student ;
+                       rdfs:range Domitory:Domitory .
+
+
+###  http://kndonto.org/Student/StudentInfo#LiveIn
+StudentInfo:LiveIn rdf:type owl:ObjectProperty ;
+                   rdfs:domain foaf:Person ;
+                   rdfs:range <http://dbpedia.org/ontology/Place> .
+
+
+###  http://kndonto.org/Student/StudentInfo#PeopleInThis
+StudentInfo:PeopleInThis rdf:type owl:ObjectProperty ;
+                         owl:inverseOf StudentInfo:PeopleInThis ;
+                         rdfs:domain StudentInfo:Situation ;
+                         rdfs:range StudentInfo:Student .
+
+
+###  http://kndonto.org/Student/StudentInfo#StudyIn
+StudentInfo:StudyIn rdf:type owl:ObjectProperty ;
+                    rdfs:domain StudentInfo:Student ;
+                    rdfs:range Organization:College .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://dbpedia.org/ontology/Company
+<http://dbpedia.org/ontology/Company> rdf:type owl:Class ;
+                                      rdfs:subClassOf Organization:Organization .
+
+
+###  http://dbpedia.org/ontology/Place
+<http://dbpedia.org/ontology/Place> rdf:type owl:Class .
+
+
+###  http://kndonto.org/Company#Other
+Company:Other rdf:type owl:Class ;
+              rdfs:subClassOf <http://dbpedia.org/ontology/Company> .
+
+
+###  http://kndonto.org/Company#Overseas_Funded
+Company:Overseas_Funded rdf:type owl:Class ;
+                        rdfs:subClassOf <http://dbpedia.org/ontology/Company> .
+
+
+###  http://kndonto.org/Company#Private_Company
+Company:Private_Company rdf:type owl:Class ;
+                        rdfs:subClassOf <http://dbpedia.org/ontology/Company> .
+
+
+###  http://kndonto.org/Company#State_Owned
+Company:State_Owned rdf:type owl:Class ;
+                    rdfs:subClassOf <http://dbpedia.org/ontology/Company> .
+
+
+###  http://kndonto.org/Domitory#Domitory
+Domitory:Domitory rdf:type owl:Class .
+
+
+###  http://kndonto.org/Domitory#RoomCapacity
+Domitory:RoomCapacity rdf:type owl:Class .
+
+
+###  http://kndonto.org/Industry#Industry
+Industry:Industry rdf:type owl:Class .
+
+
+###  http://kndonto.org/Organization#College
+Organization:College rdf:type owl:Class ;
+                     rdfs:subClassOf Organization:Organization .
+
+
+###  http://kndonto.org/Organization#Organization
+Organization:Organization rdf:type owl:Class .
+
+
+###  http://kndonto.org/Student/StudentInfo#Situation
+StudentInfo:Situation rdf:type owl:Class .
+
+
+###  http://kndonto.org/Student/StudentInfo#Student
+StudentInfo:Student rdf:type owl:Class ;
+                    rdfs:subClassOf foaf:Person .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://dbpedia.org/ontology#Dianzikeji_Uni
+<http://dbpedia.org/ontology#Dianzikeji_Uni> rdf:type owl:NamedIndividual ,
+                                                      Organization:College ;
+                                             Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                             Place:Location <http://kndonto.org/Destination#SICHUAN> ;
+                                             Company:CompanyName "Dianzikeji_Uni" ;
+                                             Company:attribute "College" ;
+                                             Company:domain "Education" .
+
+
+###  http://dbpedia.org/ontology#LMU
+<http://dbpedia.org/ontology#LMU> rdf:type owl:NamedIndividual ,
+                                           Organization:College ;
+                                  Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201400121024> ;
+                                  Place:Location <http://kndonto.org/Destination#GER> ;
+                                  Company:CompanyName "LMU" ;
+                                  Company:attribute "College" ;
+                                  Company:domain "Education" .
+
+
+###  http://dbpedia.org/ontology#TCD
+<http://dbpedia.org/ontology#TCD> rdf:type owl:NamedIndividual ,
+                                           Organization:College ;
+                                  Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201400121035> ;
+                                  Place:Location <http://kndonto.org/Destination#IRL> ;
+                                  Company:CompanyName "TCD" ;
+                                  Company:attribute "College" ;
+                                  Company:domain "Education" .
+
+
+###  http://dbpedia.org/ontology#UC
+<http://dbpedia.org/ontology#UC> rdf:type owl:NamedIndividual ,
+                                          Organization:College ;
+                                 Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201400121013> ;
+                                 Place:Location <http://kndonto.org/Destination#USA> ;
+                                 Company:CompanyName "UC" ;
+                                 Company:attribute "College" ;
+                                 Company:domain "Education" .
+
+
+###  http://dbpedia.org/ontology#WASEDA
+<http://dbpedia.org/ontology#WASEDA> rdf:type owl:NamedIndividual ,
+                                              Organization:College ;
+                                     Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201400121180> ;
+                                     Place:Location <http://kndonto.org/Destination#JPN> ;
+                                     Company:CompanyName "WASEDA" ;
+                                     Company:attribute "College" ;
+                                     Company:domain "Education" .
+
+
+###  http://dbpedia.org/ontology#Zhongkeyuan_Dianzi_Uni
+<http://dbpedia.org/ontology#Zhongkeyuan_Dianzi_Uni> rdf:type owl:NamedIndividual ,
+                                                              Organization:College ;
+                                                     Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201405121278> ;
+                                                     Place:Location <http://kndonto.org/Destination#SHANGHAI> ;
+                                                     Company:CompanyName "Zhongkeyuan_Dianzi_Uni" ;
+                                                     Company:attribute "College" ;
+                                                     Company:domain "Education" .
+
+
+###  http://dbpedia.org/ontology#Zhongkeyuan_Jiwu_Uni
+<http://dbpedia.org/ontology#Zhongkeyuan_Jiwu_Uni> rdf:type owl:NamedIndividual ,
+                                                            Organization:College ;
+                                                   Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                           <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                                           <http://kndonto.org/Student/StudentInfo#201405121273> ;
+                                                   Place:Location <http://kndonto.org/Destination#SHANGHAI> ;
+                                                   Company:CompanyName "Zhongkeyuan_Jiwu_Uni" ;
+                                                   Company:attribute "College" ;
+                                                   Company:domain "Education" .
+
+
+###  http://dbpedia.org/ontology#Zhongkeyuan_Zidong_Uni
+<http://dbpedia.org/ontology#Zhongkeyuan_Zidong_Uni> rdf:type owl:NamedIndividual ,
+                                                              Organization:College ;
+                                                     Organization:hasStudent <http://kndonto.org/Student/StudentInfo#201400121082> ;
+                                                     Place:Location <http://kndonto.org/Destination#BEIJING> ;
+                                                     Company:CompanyName "Zhongkeyuan_Zidong_Uni" ;
+                                                     Company:attribute "College" ;
+                                                     Company:domain "Education" .
+
+
+###  http://example.org/Student/StudentInfo#College_Offer_Accepted
+<http://example.org/Student/StudentInfo#College_Offer_Accepted> rdf:type owl:NamedIndividual ,
+                                                                         StudentInfo:Situation ;
+                                                                StudentInfo:PeopleInThis <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201405121278> ,
+                                                                                         <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                                                StudentInfo:situation "College_Offer_Accepted" .
+
+
+###  http://example.org/Student/StudentInfo#Job_Offer_Accepted
+<http://example.org/Student/StudentInfo#Job_Offer_Accepted> rdf:type owl:NamedIndividual ,
+                                                                     StudentInfo:Situation ;
+                                                            StudentInfo:PeopleInThis <http://kndonto.org/Student/StudentInfo#201305121112> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121032> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121074> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121081> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121126> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121172> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121193> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201402121206> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201418121226> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201418121233> ,
+                                                                                     <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                                            StudentInfo:situation "Job_Offer_Accepted" .
+
+
+###  http://example.org/Student/StudentInfo#Searching_for_Job
+<http://example.org/Student/StudentInfo#Searching_for_Job> rdf:type owl:NamedIndividual ,
+                                                                    StudentInfo:Situation ;
+                                                           StudentInfo:PeopleInThis <http://kndonto.org/Student/StudentInfo#201200121077> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201400121004> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201401121209> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                                                    <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                                           StudentInfo:situation "Searching_for_Job" .
+
+
+###  http://kndonto.org/Company#Disneyland
+Company:Disneyland rdf:type owl:NamedIndividual ,
+                            Company:Overseas_Funded ;
+                   Place:Location <http://kndonto.org/Destination#SHANGHAI> ;
+                   StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                   Company:CompanyName "Disneyland" ;
+                   Company:attribute "Foreign" ;
+                   Company:avg_monthly_salary 6000 ;
+                   Company:domain "Entertainment" .
+
+
+###  http://kndonto.org/Company#Guangdong_Xiaojiaoyu
+Company:Guangdong_Xiaojiaoyu rdf:type owl:NamedIndividual ,
+                                      Company:Private_Company ;
+                             Place:Location <http://kndonto.org/Destination#GUANGDONG> ;
+                             StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121032> ;
+                             Company:CompanyName "Guangdong_Xiaojiaoyu" ;
+                             Company:attribute "Private" ;
+                             Company:avg_monthly_salary 7000 ;
+                             Company:domain "Education" .
+
+
+###  http://kndonto.org/Company#Hangzhou_Haikangweishi
+Company:Hangzhou_Haikangweishi rdf:type owl:NamedIndividual ,
+                                        Company:State_Owned ;
+                               Place:Location <http://kndonto.org/Destination#ZHEJIANG> ;
+                               StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201418121233> ;
+                               Company:CompanyName "Hangzhou_Haikangweishi" ;
+                               Company:attribute "State_Owned" ;
+                               Company:avg_monthly_salary 6000 ;
+                               Company:domain "Technical_industry" .
+
+
+###  http://kndonto.org/Company#Huawei
+Company:Huawei rdf:type owl:NamedIndividual ,
+                        Company:Private_Company ;
+               Place:Location <http://kndonto.org/Destination#ZHEJIANG> ;
+               StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201418121242> ;
+               Company:CompanyName "Huawei" ;
+               Company:attribute "Private" ;
+               Company:avg_monthly_salary 8500 ;
+               Company:domain "Technical_industry" .
+
+
+###  http://kndonto.org/Company#Inspur
+Company:Inspur rdf:type owl:NamedIndividual ,
+                        Company:State_Owned ;
+               Place:Location <http://kndonto.org/Destination#SHANDONG> ;
+               StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121081> ,
+                                  <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                  <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                  <http://kndonto.org/Student/StudentInfo#201400121152> ;
+               Company:CompanyName "Inspur" ;
+               Company:attribute "State_Owned" ;
+               Company:avg_monthly_salary 7500 ;
+               Company:domain "Technical_industry" .
+
+
+###  http://kndonto.org/Company#Jinan_SGC
+Company:Jinan_SGC rdf:type owl:NamedIndividual ,
+                           Company:State_Owned ;
+                  Place:Location <http://kndonto.org/Destination#SHANDONG> ;
+                  StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121126> ;
+                  Company:CompanyName "Jinan_SGC" ;
+                  Company:attribute "State_Owned" ;
+                  Company:avg_monthly_salary 6000 ;
+                  Company:domain "Society" .
+
+
+###  http://kndonto.org/Company#Jinan_Zhongweishiji
+Company:Jinan_Zhongweishiji rdf:type owl:NamedIndividual ,
+                                     Company:State_Owned ;
+                            Place:Location <http://kndonto.org/Destination#JINAN> ;
+                            StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121039> ;
+                            Company:CompanyName "Jinan_Zhongweishiji" ;
+                            Company:attribute "State_Owned" ;
+                            Company:avg_monthly_salary 5500 ;
+                            Company:domain "Technical_industry" .
+
+
+###  http://kndonto.org/Company#Kunming_Technique
+Company:Kunming_Technique rdf:type owl:NamedIndividual ,
+                                   Company:Private_Company ;
+                          Place:Location <http://kndonto.org/Destination#YUNNAN> ;
+                          StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121162> ;
+                          Company:CompanyName "Kunming_Technique" ;
+                          Company:attribute "Private" ;
+                          Company:avg_monthly_salary 5000 ;
+                          Company:domain "Technical_industry" .
+
+
+###  http://kndonto.org/Company#Minsheng_Bank
+Company:Minsheng_Bank rdf:type owl:NamedIndividual ,
+                               Company:State_Owned ;
+                      Place:Location <http://kndonto.org/Destination#BEIJING> ;
+                      StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121193> ,
+                                         <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                      Company:CompanyName "Minsheng_Bank" ;
+                      Company:attribute "State_Owned" ;
+                      Company:avg_monthly_salary 7000 ;
+                      Company:domain "Financial_Industry" .
+
+
+###  http://kndonto.org/Company#None
+Company:None rdf:type owl:NamedIndividual ,
+                      Company:Other ;
+             StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201200121077> ,
+                                <http://kndonto.org/Student/StudentInfo#201400121004> ,
+                                <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                <http://kndonto.org/Student/StudentInfo#201401121209> ,
+                                <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                <http://kndonto.org/Student/StudentInfo#201418121244> ;
+             Company:CompanyName "None" .
+
+
+###  http://kndonto.org/Company#Shunde_Commercial_Bank
+Company:Shunde_Commercial_Bank rdf:type owl:NamedIndividual ,
+                                        Company:State_Owned ;
+                               Place:Location <http://kndonto.org/Destination#GUANGDONG> ;
+                               StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121172> ;
+                               Company:CompanyName "Shunde_Commercial_Bank" ;
+                               Company:attribute "State_Owned" ;
+                               Company:avg_monthly_salary 6000 ;
+                               Company:domain "Financial_Industry" .
+
+
+###  http://kndonto.org/Company#Xindongfang_Education
+Company:Xindongfang_Education rdf:type owl:NamedIndividual ,
+                                       Company:Private_Company ;
+                              Place:Location <http://kndonto.org/Destination#SHANDONG> ;
+                              StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                 <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                 <http://kndonto.org/Student/StudentInfo#201400121198> ;
+                              Company:CompanyName "Xindongfang_Education" ;
+                              Company:attribute "Private" ;
+                              Company:avg_monthly_salary 7500 ;
+                              Company:domain "Education" .
+
+
+###  http://kndonto.org/Company#Xinglong_Technique
+Company:Xinglong_Technique rdf:type owl:NamedIndividual ,
+                                    Company:State_Owned ;
+                           Place:Location <http://kndonto.org/Destination#JIANGSU> ;
+                           StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201305121112> ;
+                           Company:CompanyName "Xinglong_Technique" ;
+                           Company:attribute "State_Owned" ;
+                           Company:avg_monthly_salary 5000 ;
+                           Company:domain "Technical_industry" .
+
+
+###  http://kndonto.org/Company#Xinjiang_Communication_Company
+Company:Xinjiang_Communication_Company rdf:type owl:NamedIndividual ,
+                                                Company:Private_Company ;
+                                       Place:Location <http://kndonto.org/Destination#XINJIANG> ;
+                                       StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121204> ;
+                                       Company:CompanyName "Xinjiang_Communication_Company" ;
+                                       Company:attribute "Private" ;
+                                       Company:avg_monthly_salary 5000 ;
+                                       Company:domain "Technical_industry" .
+
+
+###  http://kndonto.org/Company#Xintong_Education
+Company:Xintong_Education rdf:type owl:NamedIndividual ,
+                                   Company:Private_Company ;
+                          Place:Location <http://kndonto.org/Destination#SHANDONG> ;
+                          StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121074> ;
+                          Company:CompanyName "Xintong_Education" ;
+                          Company:attribute "Private" ;
+                          Company:avg_monthly_salary 7000 ;
+                          Company:domain "Education" .
+
+
+###  http://kndonto.org/Company#Cangzhou_HR&SS_Bureau
+<http://kndonto.org/Company#Cangzhou_HR&SS_Bureau> rdf:type owl:NamedIndividual ,
+                                                            Company:State_Owned ;
+                                                   Place:Location <http://kndonto.org/Destination#HEBEI> ;
+                                                   StudentInfo:Employ <http://kndonto.org/Student/StudentInfo#201400121009> ;
+                                                   Company:CompanyName "Cangzhou_HR&SS_Bureau" ;
+                                                   Company:attribute "State_Owned" ;
+                                                   Company:avg_monthly_salary 5500 ;
+                                                   Company:domain "Society" .
+
+
+###  http://kndonto.org/Destination#ANHUI
+<http://kndonto.org/Destination#ANHUI> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121056> ;
+                                       Place:has_pillar_industry Industry:Light_Industry ;
+                                       Place:capital "HEFEI" ;
+                                       Place:gdp 27018.32 ;
+                                       Place:house_pricing 15833 ;
+                                       Place:latitude "117.9249" ;
+                                       Place:longitude "30.6007" ;
+                                       Place:placeName "ANHUI" .
+
+
+###  http://kndonto.org/Destination#AOMEN
+<http://kndonto.org/Destination#AOMEN> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:has_pillar_industry Industry:Service_Industry ;
+                                       Place:capital "AOMEN" ;
+                                       Place:gdp 54401.48 ;
+                                       Place:house_pricing 31497 ;
+                                       Place:latitude "113.5439" ;
+                                       Place:longitude "22.1987" .
+
+
+###  http://kndonto.org/Destination#BEIJING
+<http://kndonto.org/Destination#BEIJING> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                            <http://kndonto.org/Student/StudentInfo#201400121193> ,
+                                                            <http://kndonto.org/Student/StudentInfo#201402121206> ,
+                                                            <http://kndonto.org/Student/StudentInfo#201405121273> ;
+                                         Place:has_pillar_industry Industry:Financial_Industry ;
+                                         Place:capital "BEIJING" ;
+                                         Place:gdp 28014.94 ;
+                                         Place:house_pricing 64325 ;
+                                         Place:latitude "116.2305" ;
+                                         Place:longitude "40.2374" ;
+                                         Place:placeName "BEIJING" .
+
+
+###  http://kndonto.org/Destination#CHONGQING
+<http://kndonto.org/Destination#CHONGQING> rdf:type owl:NamedIndividual ,
+                                                    <http://dbpedia.org/ontology/Place> ;
+                                           Place:has_pillar_industry Industry:Financial_Industry ;
+                                           Place:capital "CHONGQING" ;
+                                           Place:gdp 19424.73 ;
+                                           Place:house_pricing 12489 ;
+                                           Place:latitude "106.9123" ;
+                                           Place:longitude "29.4316" .
+
+
+###  http://kndonto.org/Destination#FUJIAN
+<http://kndonto.org/Destination#FUJIAN> rdf:type owl:NamedIndividual ,
+                                                 <http://dbpedia.org/ontology/Place> ;
+                                        Place:has_pillar_industry Industry:Agriculture ;
+                                        Place:capital "FUZHOU" ;
+                                        Place:gdp 32182.09 ;
+                                        Place:house_pricing 26762 ;
+                                        Place:latitude "117.9249" ;
+                                        Place:longitude "26.4837" .
+
+
+###  http://kndonto.org/Destination#GANSU
+<http://kndonto.org/Destination#GANSU> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:has_pillar_industry Industry:Agriculture ;
+                                       Place:capital "LANZHOU" ;
+                                       Place:gdp 7459.9 ;
+                                       Place:house_pricing 12485 ;
+                                       Place:latitude "104.2861" ;
+                                       Place:longitude "35.7518" .
+
+
+###  http://kndonto.org/Destination#GER
+<http://kndonto.org/Destination#GER> rdf:type owl:NamedIndividual ,
+                                              <http://dbpedia.org/ontology/Place> ;
+                                     Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121024> ;
+                                     Place:has_pillar_industry Industry:Heavy_Industry ;
+                                     Place:capital "BERLIN" ;
+                                     Place:gdp 44550.04 ;
+                                     Place:house_pricing 16965 ;
+                                     Place:latitude "10.4515" ;
+                                     Place:longitude "51.1657" ;
+                                     Place:placeName "GER" .
+
+
+###  http://kndonto.org/Destination#GUANGDONG
+<http://kndonto.org/Destination#GUANGDONG> rdf:type owl:NamedIndividual ,
+                                                    <http://dbpedia.org/ontology/Place> ;
+                                           Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121032> ,
+                                                              <http://kndonto.org/Student/StudentInfo#201400121172> ;
+                                           Place:has_pillar_industry Industry:Light_Industry ;
+                                           Place:capital "GUANGZHOU" ;
+                                           Place:gdp 89705.23 ;
+                                           Place:house_pricing 33704 ;
+                                           Place:latitude "113.7633" ;
+                                           Place:longitude "23.379" ;
+                                           Place:placeName "GUANGDONG" .
+
+
+###  http://kndonto.org/Destination#GUANGXI
+<http://kndonto.org/Destination#GUANGXI> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:has_pillar_industry Industry:Agriculture ;
+                                         Place:capital "NANNING" ;
+                                         Place:gdp 18523.26 ;
+                                         Place:house_pricing 12435 ;
+                                         Place:latitude "108.8076" ;
+                                         Place:longitude "23.7248" .
+
+
+###  http://kndonto.org/Destination#GUIZHOU
+<http://kndonto.org/Destination#GUIZHOU> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:has_pillar_industry Industry:Light_Industry ;
+                                         Place:capital "GUIYANG" ;
+                                         Place:gdp 13540.83 ;
+                                         Place:house_pricing 9644 ;
+                                         Place:latitude "107.2903" ;
+                                         Place:longitude "26.843" .
+
+
+###  http://kndonto.org/Destination#HAINAN
+<http://kndonto.org/Destination#HAINAN> rdf:type owl:NamedIndividual ,
+                                                 <http://dbpedia.org/ontology/Place> ;
+                                        Place:has_pillar_industry Industry:Tourism_Industry ;
+                                        Place:capital "HAIKOU" ;
+                                        Place:gdp 4462.54 ;
+                                        Place:house_pricing 37434 ;
+                                        Place:latitude "109.9497" ;
+                                        Place:longitude "19.5664" .
+
+
+###  http://kndonto.org/Destination#HEBEI
+<http://kndonto.org/Destination#HEBEI> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121009> ;
+                                       Place:has_pillar_industry Industry:Heavy_Industry ;
+                                       Place:capital "SHIJIAZHUANG" ;
+                                       Place:gdp 34016.32 ;
+                                       Place:house_pricing 9619 ;
+                                       Place:latitude "114.9042" ;
+                                       Place:longitude "37.8957" ;
+                                       Place:placeName "HEBEI" .
+
+
+###  http://kndonto.org/Destination#HEILONGJIANG
+<http://kndonto.org/Destination#HEILONGJIANG> rdf:type owl:NamedIndividual ,
+                                                       <http://dbpedia.org/ontology/Place> ;
+                                              Place:has_pillar_industry Industry:Forestry ;
+                                              Place:capital "HAERBIN" ;
+                                              Place:gdp 15902.68 ;
+                                              Place:house_pricing 11053 ;
+                                              Place:latitude "128.7382" ;
+                                              Place:longitude "47.1216" .
+
+
+###  http://kndonto.org/Destination#HENAN
+<http://kndonto.org/Destination#HENAN> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:has_pillar_industry Industry:Agriculture ;
+                                       Place:capital "ZHENGZHOU" ;
+                                       Place:gdp 44552.83 ;
+                                       Place:house_pricing 13937 ;
+                                       Place:latitude "113.3824" ;
+                                       Place:longitude "34.2904" .
+
+
+###  http://kndonto.org/Destination#HUBEI
+<http://kndonto.org/Destination#HUBEI> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:has_pillar_industry Industry:Light_Industry ;
+                                       Place:capital "WUHAN" ;
+                                       Place:gdp 35478.09 ;
+                                       Place:house_pricing 18200 ;
+                                       Place:latitude "122.2384" ;
+                                       Place:longitude "30.7378" .
+
+
+###  http://kndonto.org/Destination#HUNAN
+<http://kndonto.org/Destination#HUNAN> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:hasResidents <http://kndonto.org/Student/StudentInfo#201418121228> ;
+                                       Place:has_pillar_industry Industry:transportation ;
+                                       Place:capital "CHANGSHA" ;
+                                       Place:gdp 33902.96 ;
+                                       Place:house_pricing 10872 ;
+                                       Place:latitude "111.8569" ;
+                                       Place:longitude "27.6253" ;
+                                       Place:placeName "HUNAN" .
+
+
+###  http://kndonto.org/Destination#IRL
+<http://kndonto.org/Destination#IRL> rdf:type owl:NamedIndividual ,
+                                              <http://dbpedia.org/ontology/Place> ;
+                                     Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121035> ;
+                                     Place:has_pillar_industry Industry:Financial_Industry ;
+                                     Place:capital "DUBLIN" ;
+                                     Place:gdp 70638.23 ;
+                                     Place:house_pricing 20575 ;
+                                     Place:latitude "8.2439" ;
+                                     Place:longitude "53.4129" ;
+                                     Place:placeName "IRL" .
+
+
+###  http://kndonto.org/Destination#JIANGSU
+<http://kndonto.org/Destination#JIANGSU> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:hasResidents <http://kndonto.org/Student/StudentInfo#201305121112> ,
+                                                            <http://kndonto.org/Student/StudentInfo#201400121161> ;
+                                         Place:has_pillar_industry Industry:Light_Industry ;
+                                         Place:capital "NANJING" ;
+                                         Place:gdp 85869.76 ;
+                                         Place:house_pricing 30829 ;
+                                         Place:latitude "119.7889" ;
+                                         Place:longitude "33.1402" ;
+                                         Place:placeName "JIANGSU" .
+
+
+###  http://kndonto.org/Destination#JIANGXI
+<http://kndonto.org/Destination#JIANGXI> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:has_pillar_industry Industry:Agriculture ;
+                                         Place:capital "NANCHANG" ;
+                                         Place:gdp 20006.32 ;
+                                         Place:house_pricing 12851 ;
+                                         Place:latitude "114.9042" ;
+                                         Place:longitude "27.0875" .
+
+
+###  http://kndonto.org/Destination#JILIN
+<http://kndonto.org/Destination#JILIN> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:has_pillar_industry Industry:Pharmaceuticals_Industry ;
+                                       Place:capital "CHANGCHUN" ;
+                                       Place:gdp 14944.53 ;
+                                       Place:house_pricing 10075 ;
+                                       Place:latitude "126.4371" ;
+                                       Place:longitude "43.152" .
+
+
+###  http://kndonto.org/Destination#JINAN
+<http://kndonto.org/Destination#JINAN> rdf:type owl:NamedIndividual ,
+                                                <http://dbpedia.org/ontology/Place> ;
+                                       Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121039> ;
+                                       Place:placeName "JINAN" .
+
+
+###  http://kndonto.org/Destination#JPN
+<http://kndonto.org/Destination#JPN> rdf:type owl:NamedIndividual ,
+                                              <http://dbpedia.org/ontology/Place> ;
+                                     Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121180> ;
+                                     Place:has_pillar_industry Industry:Heavy_Industry ;
+                                     Place:capital "TOKYO" ;
+                                     Place:gdp 38399.98 ;
+                                     Place:house_pricing 44000 ;
+                                     Place:latitude "138.2529" ;
+                                     Place:longitude "36.2048" ;
+                                     Place:placeName "JPN" .
+
+
+###  http://kndonto.org/Destination#LIAONING
+<http://kndonto.org/Destination#LIAONING> rdf:type owl:NamedIndividual ,
+                                                   <http://dbpedia.org/ontology/Place> ;
+                                          Place:has_pillar_industry Industry:Heavy_Industry ;
+                                          Place:capital "SHENYANG" ;
+                                          Place:gdp 23409.24 ;
+                                          Place:house_pricing 11180 ;
+                                          Place:latitude "122.529" ;
+                                          Place:longitude "41.9437" .
+
+
+###  http://kndonto.org/Destination#NEIMENGGU
+<http://kndonto.org/Destination#NEIMENGGU> rdf:type owl:NamedIndividual ,
+                                                    <http://dbpedia.org/ontology/Place> ;
+                                           Place:has_pillar_industry Industry:Agriculture ;
+                                           Place:capital "HUHEHAOTE" ;
+                                           Place:gdp 16096.21 ;
+                                           Place:house_pricing 9317 ;
+                                           Place:latitude "115.0595" ;
+                                           Place:longitude "43.3782" .
+
+
+###  http://kndonto.org/Destination#NINGXIA
+<http://kndonto.org/Destination#NINGXIA> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:has_pillar_industry Industry:Agriculture ;
+                                         Place:capital "YINCHUAN" ;
+                                         Place:gdp 3443.56 ;
+                                         Place:house_pricing 9254 ;
+                                         Place:latitude "106.1581" ;
+                                         Place:longitude "37.1987" .
+
+
+###  http://kndonto.org/Destination#QINGHAI
+<http://kndonto.org/Destination#QINGHAI> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:hasResidents <http://kndonto.org/Student/StudentInfo#201200121077> ;
+                                         Place:has_pillar_industry Industry:Agriculture ;
+                                         Place:capital "XINING" ;
+                                         Place:gdp 2624.83 ;
+                                         Place:house_pricing 9140 ;
+                                         Place:latitude "96.4077" ;
+                                         Place:longitude "35.7448" ;
+                                         Place:placeName "QINGHAI" .
+
+
+###  http://kndonto.org/Destination#SHANANXI
+<http://kndonto.org/Destination#SHANANXI> rdf:type owl:NamedIndividual ,
+                                                   <http://dbpedia.org/ontology/Place> ;
+                                          Place:has_pillar_industry Industry:Energy_Industry ;
+                                          Place:capital "XIAN" ;
+                                          Place:gdp 28198.81 ;
+                                          Place:house_pricing 14844 ;
+                                          Place:latitude "109.188" ;
+                                          Place:longitude "35.394" .
+
+
+###  http://kndonto.org/Destination#SHANDONG
+<http://kndonto.org/Destination#SHANDONG> rdf:type owl:NamedIndividual ,
+                                                   <http://dbpedia.org/ontology/Place> ;
+                                          Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121074> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121081> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121126> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                          Place:has_pillar_industry Industry:Heavy_Industry ;
+                                          Place:capital "JINAN" ;
+                                          Place:gdp 72634.15 ;
+                                          Place:house_pricing 21080 ;
+                                          Place:latitude "117.9249" ;
+                                          Place:longitude "35.894" ;
+                                          Place:placeName "SHANDONG" .
+
+
+###  http://kndonto.org/Destination#SHANGHAI
+<http://kndonto.org/Destination#SHANGHAI> rdf:type owl:NamedIndividual ,
+                                                   <http://dbpedia.org/ontology/Place> ;
+                                          Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201405121278> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                                          Place:has_pillar_industry Industry:Financial_Industry ;
+                                          Place:capital "SHANGHAI" ;
+                                          Place:gdp 30632.99 ;
+                                          Place:house_pricing 53626 ;
+                                          Place:latitude "121.4456" ;
+                                          Place:longitude "31.2193" ;
+                                          Place:placeName "SHANGHAI" .
+
+
+###  http://kndonto.org/Destination#SHANXI
+<http://kndonto.org/Destination#SHANXI> rdf:type owl:NamedIndividual ,
+                                                 <http://dbpedia.org/ontology/Place> ;
+                                        Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                                           <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                        Place:has_pillar_industry Industry:Energy_Industry ;
+                                        Place:capital "TAIYUAN" ;
+                                        Place:gdp 15528.42 ;
+                                        Place:house_pricing 12162 ;
+                                        Place:latitude "111.8569" ;
+                                        Place:longitude "37.2426" ;
+                                        Place:placeName "SHANXI" .
+
+
+###  http://kndonto.org/Destination#SICHUAN
+<http://kndonto.org/Destination#SICHUAN> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:hasResidents <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                         Place:has_pillar_industry Industry:Service_Industry ;
+                                         Place:capital "CHENGDU" ;
+                                         Place:gdp 36980.22 ;
+                                         Place:house_pricing 15745 ;
+                                         Place:latitude "102.8055" ;
+                                         Place:longitude "30.2638" ;
+                                         Place:placeName "SICHUAN" .
+
+
+###  http://kndonto.org/Destination#TAIWAN
+<http://kndonto.org/Destination#TAIWAN> rdf:type owl:NamedIndividual ,
+                                                 <http://dbpedia.org/ontology/Place> ;
+                                        Place:has_pillar_industry Industry:Tourism_Industry ;
+                                        Place:capital "TAIBEI" ;
+                                        Place:gdp 24576.87 ;
+                                        Place:house_pricing 52394 ;
+                                        Place:latitude "121.0794" ;
+                                        Place:longitude "23.9037" .
+
+
+###  http://kndonto.org/Destination#TIANJIN
+<http://kndonto.org/Destination#TIANJIN> rdf:type owl:NamedIndividual ,
+                                                  <http://dbpedia.org/ontology/Place> ;
+                                         Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121004> ;
+                                         Place:has_pillar_industry Industry:Tourism_Industry ;
+                                         Place:capital "TIANJIN" ;
+                                         Place:gdp 18549.19 ;
+                                         Place:house_pricing 25504 ;
+                                         Place:latitude "117.3616" ;
+                                         Place:longitude "39.3434" ;
+                                         Place:placeName "TIANJIN" .
+
+
+###  http://kndonto.org/Destination#USA
+<http://kndonto.org/Destination#USA> rdf:type owl:NamedIndividual ,
+                                              <http://dbpedia.org/ontology/Place> ;
+                                     Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121013> ;
+                                     Place:has_pillar_industry Industry:Financial_Industry ;
+                                     Place:capital "WASHINGTON" ;
+                                     Place:gdp 59500.95 ;
+                                     Place:house_pricing 10978 ;
+                                     Place:latitude "95.7129" ;
+                                     Place:longitude "37.0902" ;
+                                     Place:placeName "USA" .
+
+
+###  http://kndonto.org/Destination#XIANGGANG
+<http://kndonto.org/Destination#XIANGGANG> rdf:type owl:NamedIndividual ,
+                                                    <http://dbpedia.org/ontology/Place> ;
+                                           Place:has_pillar_industry Industry:Service_Industry ;
+                                           Place:capital "XIANGGANG" ;
+                                           Place:gdp 46109.25 ;
+                                           Place:house_pricing 47739 ;
+                                           Place:latitude "114.1694" ;
+                                           Place:longitude "22.3193" .
+
+
+###  http://kndonto.org/Destination#XINJIANG
+<http://kndonto.org/Destination#XINJIANG> rdf:type owl:NamedIndividual ,
+                                                   <http://dbpedia.org/ontology/Place> ;
+                                          Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121204> ;
+                                          Place:has_pillar_industry Industry:Agriculture ;
+                                          Place:capital "WULUMUQI" ;
+                                          Place:gdp 10881.96 ;
+                                          Place:house_pricing 9251 ;
+                                          Place:latitude "87.5396" ;
+                                          Place:longitude "42.5246" ;
+                                          Place:placeName "XINJIANG" .
+
+
+###  http://kndonto.org/Destination#XIZANG
+<http://kndonto.org/Destination#XIZANG> rdf:type owl:NamedIndividual ,
+                                                 <http://dbpedia.org/ontology/Place> ;
+                                        Place:has_pillar_industry Industry:Agriculture ;
+                                        Place:capital "LASA" ;
+                                        Place:gdp "1310.92" ;
+                                        Place:house_pricing 11621 ;
+                                        Place:latitude "88.7879" ;
+                                        Place:longitude "30.1534" .
+
+
+###  http://kndonto.org/Destination#YUNNAN
+<http://kndonto.org/Destination#YUNNAN> rdf:type owl:NamedIndividual ,
+                                                 <http://dbpedia.org/ontology/Place> ;
+                                        Place:hasResidents <http://kndonto.org/Student/StudentInfo#201400121162> ;
+                                        Place:has_pillar_industry Industry:Agriculture ;
+                                        Place:capital "KUNMING" ;
+                                        Place:gdp "16376.34" ;
+                                        Place:house_pricing 13246 ;
+                                        Place:latitude "101.3431" ;
+                                        Place:longitude "24.4753" ;
+                                        Place:placeName "YUNNAN" .
+
+
+###  http://kndonto.org/Destination#ZHEJIANG
+<http://kndonto.org/Destination#ZHEJIANG> rdf:type owl:NamedIndividual ,
+                                                   <http://dbpedia.org/ontology/Place> ;
+                                          Place:hasResidents <http://kndonto.org/Student/StudentInfo#201418121233> ,
+                                                             <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                          Place:has_pillar_industry Industry:Light_Industry ;
+                                          Place:capital "HANGZHOU" ;
+                                          Place:gdp "51768.26" ;
+                                          Place:house_pricing 30763 ;
+                                          Place:latitude "119.7889" ;
+                                          Place:longitude "29.1416" ;
+                                          Place:placeName "ZHEJIANG" .
+
+
+###  http://kndonto.org/Domitory#Large
+Domitory:Large rdf:type owl:NamedIndividual ,
+                        Domitory:RoomCapacity ;
+               Domitory:HasRoom <http://kndonto.org/Domitory#11_303> ,
+                                <http://kndonto.org/Domitory#11_305> ,
+                                <http://kndonto.org/Domitory#8_634> ,
+                                <http://kndonto.org/Domitory#8_729> ,
+                                <http://kndonto.org/Domitory#8_730> ;
+               Domitory:size "Large" .
+
+
+###  http://kndonto.org/Domitory#Middle
+Domitory:Middle rdf:type owl:NamedIndividual ,
+                         Domitory:RoomCapacity ;
+                Domitory:HasRoom <http://kndonto.org/Domitory#11_225> ,
+                                 <http://kndonto.org/Domitory#11_301> ,
+                                 <http://kndonto.org/Domitory#11_305> ,
+                                 <http://kndonto.org/Domitory#11_310> ,
+                                 <http://kndonto.org/Domitory#8_634> ,
+                                 <http://kndonto.org/Domitory#8_635> ,
+                                 <http://kndonto.org/Domitory#8_729> ,
+                                 <http://kndonto.org/Domitory#8_732> ;
+                Domitory:size "Middle" .
+
+
+###  http://kndonto.org/Domitory#Outside
+Domitory:Outside rdf:type owl:NamedIndividual ,
+                          Domitory:Domitory ;
+                 Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201305121112> ;
+                 Domitory:Add_Equipment "balcony_and_bathroom" ;
+                 Domitory:Floor 1 ;
+                 Domitory:RoomNo "Outside" ;
+                 Domitory:fee 1200 .
+
+
+###  http://kndonto.org/Domitory#Small
+Domitory:Small rdf:type owl:NamedIndividual ,
+                        Domitory:RoomCapacity ;
+               Domitory:HasRoom Domitory:Outside ,
+                                <http://kndonto.org/Domitory#11_301> ,
+                                <http://kndonto.org/Domitory#11_303> ,
+                                <http://kndonto.org/Domitory#8_730> ,
+                                <http://kndonto.org/Domitory#8_732> ;
+               Domitory:size "Small" .
+
+
+###  http://kndonto.org/Domitory#11_225
+<http://kndonto.org/Domitory#11_225> rdf:type owl:NamedIndividual ,
+                                              Domitory:Domitory ;
+                                     Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201405121278> ;
+                                     Domitory:Add_Equipment "none" ;
+                                     Domitory:Floor 2 ;
+                                     Domitory:RoomNo "11_225" ;
+                                     Domitory:fee 100 .
+
+
+###  http://kndonto.org/Domitory#11_301
+<http://kndonto.org/Domitory#11_301> rdf:type owl:NamedIndividual ,
+                                              Domitory:Domitory ;
+                                     Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                     Domitory:Add_Equipment "balcony" ;
+                                     Domitory:Floor 3 ;
+                                     Domitory:RoomNo "11_301" ;
+                                     Domitory:fee 200 .
+
+
+###  http://kndonto.org/Domitory#11_303
+<http://kndonto.org/Domitory#11_303> rdf:type owl:NamedIndividual ,
+                                              Domitory:Domitory ;
+                                     Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                     Domitory:Add_Equipment "balcony_and_bathroom" ;
+                                     Domitory:Floor 3 ;
+                                     Domitory:RoomNo "11_303" ;
+                                     Domitory:fee 300 .
+
+
+###  http://kndonto.org/Domitory#11_305
+<http://kndonto.org/Domitory#11_305> rdf:type owl:NamedIndividual ,
+                                              Domitory:Domitory ;
+                                     Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                     Domitory:Add_Equipment "none" ;
+                                     Domitory:Floor 3 ;
+                                     Domitory:RoomNo "11_305" ;
+                                     Domitory:fee 100 .
+
+
+###  http://kndonto.org/Domitory#11_310
+<http://kndonto.org/Domitory#11_310> rdf:type owl:NamedIndividual ,
+                                              Domitory:Domitory ;
+                                     Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201200121077> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121074> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                         <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                     Domitory:Add_Equipment "bathroom" ;
+                                     Domitory:Floor 3 ;
+                                     Domitory:RoomNo "11_310" ;
+                                     Domitory:fee 200 .
+
+
+###  http://kndonto.org/Domitory#8_634
+<http://kndonto.org/Domitory#8_634> rdf:type owl:NamedIndividual ,
+                                             Domitory:Domitory ;
+                                    Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121126> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121172> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                    Domitory:Add_Equipment "bathroom" ;
+                                    Domitory:Floor 6 ;
+                                    Domitory:RoomNo "8_634" ;
+                                    Domitory:fee 300 .
+
+
+###  http://kndonto.org/Domitory#8_635
+<http://kndonto.org/Domitory#8_635> rdf:type owl:NamedIndividual ,
+                                             Domitory:Domitory ;
+                                    Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                                    Domitory:Add_Equipment "none" ;
+                                    Domitory:Floor 6 ;
+                                    Domitory:RoomNo "8_635" ;
+                                    Domitory:fee 200 .
+
+
+###  http://kndonto.org/Domitory#8_729
+<http://kndonto.org/Domitory#8_729> rdf:type owl:NamedIndividual ,
+                                             Domitory:Domitory ;
+                                    Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121032> ;
+                                    Domitory:Add_Equipment "balcony_and_bathroom" ;
+                                    Domitory:Floor 7 ;
+                                    Domitory:RoomNo "8_729" ;
+                                    Domitory:fee 400 .
+
+
+###  http://kndonto.org/Domitory#8_730
+<http://kndonto.org/Domitory#8_730> rdf:type owl:NamedIndividual ,
+                                             Domitory:Domitory ;
+                                    Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201418121233> ;
+                                    Domitory:Add_Equipment "bathroom" ;
+                                    Domitory:Floor 7 ;
+                                    Domitory:RoomNo "8_730" ;
+                                    Domitory:fee 300 .
+
+
+###  http://kndonto.org/Domitory#8_732
+<http://kndonto.org/Domitory#8_732> rdf:type owl:NamedIndividual ,
+                                             Domitory:Domitory ;
+                                    Domitory:HasStudent <http://kndonto.org/Student/StudentInfo#201400121004> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                                        <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                    Domitory:Add_Equipment "balcony" ;
+                                    Domitory:Floor 7 ;
+                                    Domitory:RoomNo "8_732" ;
+                                    Domitory:fee 300 .
+
+
+###  http://kndonto.org/Industry#Agriculture
+Industry:Agriculture rdf:type owl:NamedIndividual ,
+                              Industry:Industry ;
+                     Industry:Pillar_for <http://kndonto.org/Destination#FUJIAN> ,
+                                         <http://kndonto.org/Destination#GANSU> ,
+                                         <http://kndonto.org/Destination#GUANGXI> ,
+                                         <http://kndonto.org/Destination#HENAN> ,
+                                         <http://kndonto.org/Destination#JIANGXI> ,
+                                         <http://kndonto.org/Destination#NEIMENGGU> ,
+                                         <http://kndonto.org/Destination#NINGXIA> ,
+                                         <http://kndonto.org/Destination#QINGHAI> ,
+                                         <http://kndonto.org/Destination#XINJIANG> ,
+                                         <http://kndonto.org/Destination#XIZANG> ,
+                                         <http://kndonto.org/Destination#YUNNAN> ;
+                     Industry:industry "Agriculture" .
+
+
+###  http://kndonto.org/Industry#Energy_Industry
+Industry:Energy_Industry rdf:type owl:NamedIndividual ,
+                                  Industry:Industry ;
+                         Industry:Pillar_for <http://kndonto.org/Destination#SHANANXI> ,
+                                             <http://kndonto.org/Destination#SHANXI> ;
+                         Industry:industry "Energy_Industry" .
+
+
+###  http://kndonto.org/Industry#Financial_Industry
+Industry:Financial_Industry rdf:type owl:NamedIndividual ,
+                                     Industry:Industry ;
+                            Industry:Pillar_for <http://kndonto.org/Destination#BEIJING> ,
+                                                <http://kndonto.org/Destination#CHONGQING> ,
+                                                <http://kndonto.org/Destination#IRL> ,
+                                                <http://kndonto.org/Destination#SHANGHAI> ,
+                                                <http://kndonto.org/Destination#USA> ;
+                            Industry:industry "Financial_Industry" .
+
+
+###  http://kndonto.org/Industry#Forestry
+Industry:Forestry rdf:type owl:NamedIndividual ,
+                           Industry:Industry ;
+                  Industry:Pillar_for <http://kndonto.org/Destination#HEILONGJIANG> ;
+                  Industry:industry "Forestry" .
+
+
+###  http://kndonto.org/Industry#Heavy_Industry
+Industry:Heavy_Industry rdf:type owl:NamedIndividual ,
+                                 Industry:Industry ;
+                        Industry:Pillar_for <http://kndonto.org/Destination#GER> ,
+                                            <http://kndonto.org/Destination#HEBEI> ,
+                                            <http://kndonto.org/Destination#JPN> ,
+                                            <http://kndonto.org/Destination#LIAONING> ,
+                                            <http://kndonto.org/Destination#SHANDONG> ;
+                        Industry:industry "Heavy_Industry" .
+
+
+###  http://kndonto.org/Industry#Light_Industry
+Industry:Light_Industry rdf:type owl:NamedIndividual ,
+                                 Industry:Industry ;
+                        Industry:Pillar_for <http://kndonto.org/Destination#ANHUI> ,
+                                            <http://kndonto.org/Destination#GUANGDONG> ,
+                                            <http://kndonto.org/Destination#GUIZHOU> ,
+                                            <http://kndonto.org/Destination#HUBEI> ,
+                                            <http://kndonto.org/Destination#JIANGSU> ,
+                                            <http://kndonto.org/Destination#ZHEJIANG> ;
+                        Industry:industry "Light_Industry" .
+
+
+###  http://kndonto.org/Industry#Pharmaceuticals_Industry
+Industry:Pharmaceuticals_Industry rdf:type owl:NamedIndividual ,
+                                           Industry:Industry ;
+                                  Industry:Pillar_for <http://kndonto.org/Destination#JILIN> ;
+                                  Industry:industry "Pharmaceuticals_Industry" .
+
+
+###  http://kndonto.org/Industry#Service_Industry
+Industry:Service_Industry rdf:type owl:NamedIndividual ,
+                                   Industry:Industry ;
+                          Industry:Pillar_for <http://kndonto.org/Destination#AOMEN> ,
+                                              <http://kndonto.org/Destination#SICHUAN> ,
+                                              <http://kndonto.org/Destination#XIANGGANG> ;
+                          Industry:industry "Service_Industry" .
+
+
+###  http://kndonto.org/Industry#Tourism_Industry
+Industry:Tourism_Industry rdf:type owl:NamedIndividual ,
+                                   Industry:Industry ;
+                          Industry:Pillar_for <http://kndonto.org/Destination#HAINAN> ,
+                                              <http://kndonto.org/Destination#TAIWAN> ,
+                                              <http://kndonto.org/Destination#TIANJIN> ;
+                          Industry:industry "Tourism_Industry" .
+
+
+###  http://kndonto.org/Industry#transportation
+Industry:transportation rdf:type owl:NamedIndividual ,
+                                 Industry:Industry ;
+                        Industry:Pillar_for <http://kndonto.org/Destination#HUNAN> ;
+                        Industry:industry "transportation" .
+
+
+###  http://kndonto.org/Student/StudentInfo#College_Offer_Accepted
+StudentInfo:College_Offer_Accepted rdf:type owl:NamedIndividual .
+
+
+###  http://kndonto.org/Student/StudentInfo#Job_Offer_Accepted
+StudentInfo:Job_Offer_Accepted rdf:type owl:NamedIndividual .
+
+
+###  http://kndonto.org/Student/StudentInfo#Searching_for_Job
+StudentInfo:Searching_for_Job rdf:type owl:NamedIndividual .
+
+
+###  http://kndonto.org/Student/StudentInfo#201200121077
+<http://kndonto.org/Student/StudentInfo#201200121077> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201200121077> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121074> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_310> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#QINGHAI> ;
+                                                      StudentInfo:phone_number 110003709464 ;
+                                                      StudentInfo:student_id 201200121077 ;
+                                                      foaf:firstName "Martin" ;
+                                                      foaf:lastName "KIM" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#MartinKIM" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201305121112
+<http://kndonto.org/Student/StudentInfo#201305121112> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Xinglong_Technique ;
+                                                      StudentInfo:LiveINRoom Domitory:Outside ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#JIANGSU> ;
+                                                      StudentInfo:phone_number 35743598407 ;
+                                                      StudentInfo:student_id 201305121112 ;
+                                                      foaf:firstName "Michael" ;
+                                                      foaf:lastName "MORGAN" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#MichaelMORGAN" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121004
+<http://kndonto.org/Student/StudentInfo#201400121004> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121004> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_732> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#TIANJIN> ;
+                                                      StudentInfo:phone_number 46787792946 ;
+                                                      StudentInfo:student_id 201400121004 ;
+                                                      foaf:firstName "Nita" ;
+                                                      foaf:lastName "LEWIS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#NitaLEWIS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121009
+<http://kndonto.org/Student/StudentInfo#201400121009> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy <http://kndonto.org/Company#Cangzhou_HR&SS_Bureau> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_301> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#HEBEI> ;
+                                                      StudentInfo:phone_number 90479003850 ;
+                                                      StudentInfo:student_id 201400121009 ;
+                                                      foaf:firstName "James" ;
+                                                      foaf:lastName "MITCHELL" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#JamesMITCHELL" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121013
+<http://kndonto.org/Student/StudentInfo#201400121013> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121009> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_301> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#USA> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#UC> ;
+                                                      StudentInfo:phone_number 100471483023 ;
+                                                      StudentInfo:student_id 201400121013 ;
+                                                      foaf:firstName "Charles" ;
+                                                      foaf:lastName "CAMPBELL" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#CharlesCAMPBELL" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121024
+<http://kndonto.org/Student/StudentInfo#201400121024> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121032> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_635> ,
+                                                                             <http://kndonto.org/Domitory#8_729> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#GER> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#LMU> ;
+                                                      StudentInfo:phone_number 76600712526 ;
+                                                      StudentInfo:student_id 201400121024 ;
+                                                      foaf:firstName "Christena" ;
+                                                      foaf:lastName "LEE" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#ChristenaLEE" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121032
+<http://kndonto.org/Student/StudentInfo#201400121032> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Guangdong_Xiaojiaoyu ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121024> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121032> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_729> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#GUANGDONG> ;
+                                                      StudentInfo:phone_number 100939162039 ;
+                                                      StudentInfo:student_id 201400121032 ;
+                                                      foaf:firstName "Guadalupe" ;
+                                                      foaf:lastName "THOMPSON" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#GuadalupeTHOMPSON" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121035
+<http://kndonto.org/Student/StudentInfo#201400121035> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121180> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_303> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#IRL> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#TCD> ;
+                                                      StudentInfo:phone_number 65055782258 ;
+                                                      StudentInfo:student_id 201400121035 ;
+                                                      foaf:firstName "Edward" ;
+                                                      foaf:lastName "TURNER" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#EdwardTURNER" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121039
+<http://kndonto.org/Student/StudentInfo#201400121039> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Jinan_Zhongweishiji ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121180> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_303> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#JINAN> ;
+                                                      StudentInfo:phone_number 45090974756 ;
+                                                      StudentInfo:student_id 201400121039 ;
+                                                      foaf:firstName "Harry" ;
+                                                      foaf:lastName "REYES" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#HarryREYES" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121056
+<http://kndonto.org/Student/StudentInfo#201400121056> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121009> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_301> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#ANHUI> ;
+                                                      StudentInfo:phone_number 74955952696 ;
+                                                      StudentInfo:student_id 201400121056 ;
+                                                      foaf:firstName "Frank" ;
+                                                      foaf:lastName "CARTER" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#FrankCARTER" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121074
+<http://kndonto.org/Student/StudentInfo#201400121074> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Xintong_Education ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201200121077> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121074> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_310> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 46290001423 ;
+                                                      StudentInfo:student_id 201400121074 ;
+                                                      foaf:firstName "Howard" ;
+                                                      foaf:lastName "COOK" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#HowardCOOK" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121081
+<http://kndonto.org/Student/StudentInfo#201400121081> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Inspur ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 79200478950 ;
+                                                      StudentInfo:student_id 201400121081 ;
+                                                      foaf:firstName "Gretchen" ;
+                                                      foaf:lastName "MARTIN" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#GretchenMARTIN" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121082
+<http://kndonto.org/Student/StudentInfo#201400121082> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121009> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_301> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#BEIJING> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#Zhongkeyuan_Zidong_Uni> ;
+                                                      StudentInfo:phone_number 96168577494 ;
+                                                      StudentInfo:student_id 201400121082 ;
+                                                      foaf:firstName "Joseph" ;
+                                                      foaf:lastName "HARRIS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#JosephHARRIS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121092
+<http://kndonto.org/Student/StudentInfo#201400121092> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Xindongfang_Education ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201200121077> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121074> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_310> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 34332957857 ;
+                                                      StudentInfo:student_id 201400121092 ;
+                                                      foaf:firstName "Lee" ;
+                                                      foaf:lastName "ROGERS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#LeeROGERS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121095
+<http://kndonto.org/Student/StudentInfo#201400121095> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Inspur ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121004> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_732> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 76791167725 ;
+                                                      StudentInfo:student_id 201400121095 ;
+                                                      foaf:firstName "Selena" ;
+                                                      foaf:lastName "WALKER" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#SelenaWALKER" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121105
+<http://kndonto.org/Student/StudentInfo#201400121105> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Inspur ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201405121273> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_305> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 109371337794 ;
+                                                      StudentInfo:student_id 201400121105 ;
+                                                      foaf:firstName "Tom" ;
+                                                      foaf:lastName "MORALES" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#TomMORALES" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121107
+<http://kndonto.org/Student/StudentInfo#201400121107> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201405121273> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_305> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANGHAI> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#Zhongkeyuan_Jiwu_Uni> ;
+                                                      StudentInfo:phone_number 44074110480 ;
+                                                      StudentInfo:student_id 201400121107 ;
+                                                      foaf:firstName "Herbert" ;
+                                                      foaf:lastName "STEWART" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#HerbertSTEWART" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121126
+<http://kndonto.org/Student/StudentInfo#201400121126> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Jinan_SGC ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121189> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121126> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121172> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_634> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 42252563676 ;
+                                                      StudentInfo:student_id 201400121126 ;
+                                                      foaf:firstName "Samantha" ;
+                                                      foaf:lastName "THOMAS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#SamanthaTHOMAS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121141
+<http://kndonto.org/Student/StudentInfo#201400121141> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121146> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121233> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_730> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 38807581270 ;
+                                                      StudentInfo:student_id 201400121141 ;
+                                                      foaf:firstName "Joseph" ;
+                                                      foaf:lastName "ROBERTS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#JosephROBERTS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121146
+<http://kndonto.org/Student/StudentInfo#201400121146> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121233> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_730> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANGHAI> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#Zhongkeyuan_Jiwu_Uni> ;
+                                                      StudentInfo:phone_number 110041820602 ;
+                                                      StudentInfo:student_id 201400121146 ;
+                                                      foaf:firstName "India" ;
+                                                      foaf:lastName "WHITE" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#IndiaWHITE" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121151
+<http://kndonto.org/Student/StudentInfo#201400121151> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Xindongfang_Education ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121009> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_301> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 104860231136 ;
+                                                      StudentInfo:student_id 201400121151 ;
+                                                      foaf:firstName "Thomas" ;
+                                                      foaf:lastName "DIAZ" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#ThomasDIAZ" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121152
+<http://kndonto.org/Student/StudentInfo#201400121152> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Inspur ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121024> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121032> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_635> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 60874426369 ;
+                                                      StudentInfo:student_id 201400121152 ;
+                                                      foaf:firstName "Eleanore" ;
+                                                      foaf:lastName "JACKSON" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#EleanoreJACKSON" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121161
+<http://kndonto.org/Student/StudentInfo#201400121161> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201405121273> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_305> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#JIANGSU> ;
+                                                      StudentInfo:phone_number 109339379122 ;
+                                                      StudentInfo:student_id 201400121161 ;
+                                                      foaf:firstName "Jacob" ;
+                                                      foaf:lastName "MORRIS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#JacobMORRIS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121162
+<http://kndonto.org/Student/StudentInfo#201400121162> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Kunming_Technique ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121180> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_303> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#YUNNAN> ;
+                                                      StudentInfo:phone_number 30886050142 ;
+                                                      StudentInfo:student_id 201400121162 ;
+                                                      foaf:firstName "Robert" ;
+                                                      foaf:lastName "EVANS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#RobertEVANS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121172
+<http://kndonto.org/Student/StudentInfo#201400121172> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Shunde_Commercial_Bank ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121189> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121126> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121172> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_634> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#GUANGDONG> ;
+                                                      StudentInfo:phone_number 97505218065 ;
+                                                      StudentInfo:student_id 201400121172 ;
+                                                      foaf:firstName "Rowena" ;
+                                                      foaf:lastName "ANDERSON" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#RowenaANDERSON" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121180
+<http://kndonto.org/Student/StudentInfo#201400121180> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_303> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#JPN> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#WASEDA> ;
+                                                      StudentInfo:phone_number 80545638092 ;
+                                                      StudentInfo:student_id 201400121180 ;
+                                                      foaf:firstName "Henry" ;
+                                                      foaf:lastName "PHILLIPS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#HenryPHILLIPS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121189
+<http://kndonto.org/Student/StudentInfo#201400121189> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121126> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121172> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_634> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANGHAI> ;
+                                                      StudentInfo:phone_number 90053464489 ;
+                                                      StudentInfo:student_id 201400121189 ;
+                                                      foaf:firstName "Robert" ;
+                                                      foaf:lastName "WILSON" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#RobertWILSON" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121191
+<http://kndonto.org/Student/StudentInfo#201400121191> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121146> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121233> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_730> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANXI> ;
+                                                      StudentInfo:phone_number 52749317124 ;
+                                                      StudentInfo:student_id 201400121191 ;
+                                                      foaf:firstName "Jessica" ;
+                                                      foaf:lastName "SANCHEZ" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#JessicaSANCHEZ" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121193
+<http://kndonto.org/Student/StudentInfo#201400121193> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Minsheng_Bank ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201200121077> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121074> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121092> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121193> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_310> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#BEIJING> ;
+                                                      StudentInfo:phone_number 113525768534 ;
+                                                      StudentInfo:student_id 201400121193 ;
+                                                      foaf:firstName "Carl" ;
+                                                      foaf:lastName "MURPHY" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#CarlMURPHY" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121195
+<http://kndonto.org/Student/StudentInfo#201400121195> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121004> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_732> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 52666497994 ;
+                                                      StudentInfo:student_id 201400121195 ;
+                                                      foaf:firstName "Ottie" ;
+                                                      foaf:lastName "ROBINSON" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#OttieROBINSON" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121198
+<http://kndonto.org/Student/StudentInfo#201400121198> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Xindongfang_Education ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121024> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121032> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_635> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 23447713032 ;
+                                                      StudentInfo:student_id 201400121198 ;
+                                                      foaf:firstName "Ethelyn" ;
+                                                      foaf:lastName "PEREZ" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#EthelynPEREZ" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201400121204
+<http://kndonto.org/Student/StudentInfo#201400121204> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Xinjiang_Communication_Company ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121180> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_303> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#XINJIANG> ;
+                                                      StudentInfo:phone_number 31483956219 ;
+                                                      StudentInfo:student_id 201400121204 ;
+                                                      foaf:firstName "Alfred" ;
+                                                      foaf:lastName "PARKER" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#AlfredPARKER" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201401121209
+<http://kndonto.org/Student/StudentInfo#201401121209> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121009> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121009> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121013> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121056> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121082> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121151> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201401121209> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_301> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANDONG> ;
+                                                      StudentInfo:phone_number 96316516823 ;
+                                                      StudentInfo:student_id 201401121209 ;
+                                                      foaf:firstName "George" ;
+                                                      foaf:lastName "GOMEZ" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#GeorgeGOMEZ" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201402121206
+<http://kndonto.org/Student/StudentInfo#201402121206> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Minsheng_Bank ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121004> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121095> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121195> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201402121206> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_732> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#BEIJING> ;
+                                                      StudentInfo:phone_number 50097210409 ;
+                                                      StudentInfo:student_id 201402121206 ;
+                                                      foaf:firstName "Meda" ;
+                                                      foaf:lastName "CLARK" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#MedaCLARK" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201405121273
+<http://kndonto.org/Student/StudentInfo#201405121273> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_305> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#BEIJING> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#Zhongkeyuan_Jiwu_Uni> ;
+                                                      StudentInfo:phone_number 80304929428 ;
+                                                      StudentInfo:student_id 201405121273 ;
+                                                      foaf:firstName "Sam" ;
+                                                      foaf:lastName "EDWARDS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#SamEDWARDS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201405121278
+<http://kndonto.org/Student/StudentInfo#201405121278> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_225> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANGHAI> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#Zhongkeyuan_Dianzi_Uni> ;
+                                                      StudentInfo:phone_number 113205071766 ;
+                                                      StudentInfo:student_id 201405121278 ;
+                                                      foaf:firstName "William" ;
+                                                      foaf:lastName "NELSON" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#WilliamNELSON" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201418121226
+<http://kndonto.org/Student/StudentInfo#201418121226> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Disneyland ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121024> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121024> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121032> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121152> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121198> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121226> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_635> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANGHAI> ;
+                                                      StudentInfo:phone_number 83373176840 ;
+                                                      StudentInfo:student_id 201418121226 ;
+                                                      foaf:firstName "Ebba" ;
+                                                      foaf:lastName "MOORE" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#EbbaMOORE" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201418121228
+<http://kndonto.org/Student/StudentInfo#201418121228> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201405121273> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_305> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#HUNAN> ;
+                                                      StudentInfo:phone_number 39502959267 ;
+                                                      StudentInfo:student_id 201418121228 ;
+                                                      foaf:firstName "Elmer" ;
+                                                      foaf:lastName "GUTIERREZ" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#ElmerGUTIERREZ" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201418121229
+<http://kndonto.org/Student/StudentInfo#201418121229> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:College_Offer_Accepted ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121189> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121126> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121172> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121189> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121229> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_634> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SICHUAN> ;
+                                                      StudentInfo:StudyIn <http://dbpedia.org/ontology#Dianzikeji_Uni> ;
+                                                      StudentInfo:phone_number 67652419893 ;
+                                                      StudentInfo:student_id 201418121229 ;
+                                                      foaf:firstName "Abigail" ;
+                                                      foaf:lastName "TAYLOR" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#AbigailTAYLOR" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201418121233
+<http://kndonto.org/Student/StudentInfo#201418121233> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Hangzhou_Haikangweishi ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121146> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121141> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121146> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121191> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121233> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#8_730> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#ZHEJIANG> ;
+                                                      StudentInfo:phone_number 101134741857 ;
+                                                      StudentInfo:student_id 201418121233 ;
+                                                      foaf:firstName "Luvenia" ;
+                                                      foaf:lastName "RAMIREZ" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#LuveniaRAMIREZ" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201418121242
+<http://kndonto.org/Student/StudentInfo#201418121242> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Job_Offer_Accepted ;
+                                                      StudentInfo:EmployedBy Company:Huawei ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201405121273> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121105> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121107> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121161> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201405121273> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121228> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121242> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_305> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#ZHEJIANG> ;
+                                                      StudentInfo:phone_number 49635186993 ;
+                                                      StudentInfo:student_id 201418121242 ;
+                                                      foaf:firstName "Roy" ;
+                                                      foaf:lastName "COLLINS" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#RoyCOLLINS" .
+
+
+###  http://kndonto.org/Student/StudentInfo#201418121244
+<http://kndonto.org/Student/StudentInfo#201418121244> rdf:type owl:NamedIndividual ,
+                                                               StudentInfo:Student ;
+                                                      StudentInfo:Current_Situation StudentInfo:Searching_for_Job ;
+                                                      StudentInfo:EmployedBy Company:None ;
+                                                      StudentInfo:HasRoomLeader <http://kndonto.org/Student/StudentInfo#201400121180> ;
+                                                      StudentInfo:HasRoomMate <http://kndonto.org/Student/StudentInfo#201400121035> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121039> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121162> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121180> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201400121204> ,
+                                                                              <http://kndonto.org/Student/StudentInfo#201418121244> ;
+                                                      StudentInfo:LiveINRoom <http://kndonto.org/Domitory#11_303> ;
+                                                      StudentInfo:LiveIn <http://kndonto.org/Destination#SHANXI> ;
+                                                      StudentInfo:phone_number 39112709801 ;
+                                                      StudentInfo:student_id 201418121244 ;
+                                                      foaf:firstName "Willie" ;
+                                                      foaf:lastName "CRUZ" ;
+                                                      foaf:name "http://kndonto.org/Student/StudentInfo#WillieCRUZ" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

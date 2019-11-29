@@ -1,0 +1,11 @@
+1. Give a room number and list the name of people who live in it.
+2. Give one’s name and find his/her room number.
+3. In which companies their main item is the pillar industry for the city where they are situated.
+4. Give one’s name and find out where he/she is currently liveIn/Employed.
+5. Give a company’s name find all its employees.
+6. Find the people’s name who are working at the cities where the house price is under 10k
+7. Find all peoples who are working in the cities with the first three highest GDP.
+8. Find all the companies in the cities with the first five highest GDP.
+9. Give people’s names and find the average monthly salary of their companies.
+10. Find those people who can pay 1 square meter of house using his/her one month salary
+11. Give people’s name and find the attribute of their companies.
