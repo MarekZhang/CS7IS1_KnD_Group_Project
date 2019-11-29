@@ -1,0 +1,18 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX com: <http://kndonto.org/Company#>
+PREFIX std: <http://kndonto.org/Student/StudentInfo#>
+PREFIX plc: <http://kndonto.org/Place#>
+PREFIX dom: <http://kndonto.org/Domitory#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX inds: <http://kndonto.org/Industry#>
+PREFIX dst: <http://kndonto.org/Destination#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+SELECT ?firstname ?lastname ?Room
+	WHERE { ?people std:LiveINRoom ?Room.
+		    ?people foaf:firstName ?firstname.
+		    ?people foaf:lastName ?lastname. 
+	        ?Room dom:RoomNo '11_303'}
+	ORDER BY(?firstname)
